@@ -1,0 +1,221 @@
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+	<constant name="struts.multipart.maxSize" value="2000000" />
+	<package name="default"
+		extends="struts-default, json-default, tiles-default">
+		<result-types>
+			<result-type name="tiles"
+				class="org.apache.struts2.views.tiles.TilesResult" />
+			<result-type name="json"
+				class="org.apache.struts2.json.JSONResult" />
+		</result-types>
+		<action name="userData"
+			class="com.typogenius.actions.UserDataAction">
+			<result type="json">
+				<param name="root">users</param>
+			</result>
+		</action>
+		<action name="login">
+			<result>./layout/login.jsp</result>
+		</action>
+		<action name="home">
+			<result>./index.jsp</result>
+		</action>
+		<action name="admission">
+			<result>./layout/admission.jsp</result>
+		</action>
+
+		<action name="dashboard">
+			<result>./layout/dashboard.jsp</result>
+		</action>
+
+		<action name="instituteList">
+			<result>./layout/institute/instituteList.jsp</result>
+		</action>
+
+
+		<action name="instituteCreation">
+			<result>./layout/institute/instituteCreation.jsp</result>
+		</action>
+
+
+		<action name="staffCreation">
+			<result>./layout/staff/staffCreation.jsp</result>
+		</action>
+
+	<action name="studentList">
+	<result>./layout/student/studentList.jsp</result>
+	</action>
+		<action name="staffList">
+			<result>./layout/staff/staffList.jsp</result>
+		</action>
+
+		<action name="courseAdd">
+			<result>./layout/course/addCourse.jsp</result>
+		</action>
+
+		<action name="addStudent">
+			<result>./layout/student/studentCreation.jsp</result>
+		</action>
+		<action name="getLatestId"
+			class="com.typogenius.actions.GetLastestIdAction">
+			<result type="json">latestInstituteId</result>
+		</action>
+
+		<action name="getLatestStaffByInstitute"
+			class="com.typogenius.actions.GetLastestIdAction"
+			method="getLatestStaffByInstitute">
+			<result name="success" type="json">
+				<param name="root">latestStaffId</param>
+			</result>
+		</action>
+		<action name="getLatestStudentByInstitute"
+			class="com.typogenius.actions.GetLastestIdAction"
+			method="getLatestStudentByInstitute">
+			<result name="success" type="json">
+				<param name="root">latestStudentId</param>
+			</result>
+		</action>
+
+		<action name="getLatestCourseByInstitute"
+			class="com.typogenius.actions.GetLastestIdAction"
+			method="getLatestCourseByInstitute">
+			<result name="success" type="json">
+				<param name="root">latestCourseId</param>
+			</result>
+		</action>
+
+		<action name="AllInsId"
+			class="com.typogenius.actions.GetLastestIdAction" method="allInsId">
+			<result type="json">allInsId</result>
+		</action>
+
+
+		<action name="instituteListAction"
+			class="com.typogenius.actions.institute.InstituteListAction"
+			method="execute">
+			<result type="json">
+				<param name="excludeProperties">institute</param>
+			</result>
+		</action>
+
+		<action name="staffListAction"
+			class="com.typogenius.actions.staff.StaffListAction" method="execute">
+			<result type="json">
+				<param name="excludeProperties">staff</param>
+			</result>
+		</action>
+		
+		<action name="studentListAction" class="com.typogenius.actions.student.StudentListAction" method="execute"> 
+		<result type="json">
+		<param name="excludeProperties">student</param>
+		</result>
+		</action>
+		
+		<action name="getStaffDetailsAction"
+			class="com.typogenius.actions.staff.StaffListAction"
+			method="getStaffDetails">
+			<result type="json">
+				<param name="includeProperties">staff.*</param>
+			</result>
+		</action>
+
+		<action name="getInstituteDetailsAction"
+			class="com.typogenius.actions.institute.InstituteListAction"
+			method="getInstituteDetails">
+			<result type="json">
+				<param name="includeProperties">institute.*</param>
+			</result>
+		</action>
+
+		<action name="instituteCreationCheck"
+			class="com.typogenius.actions.institute.InstituteCreationAction"
+			method="execute">
+			<result name="success">./layout/institute/instituteCreation.jsp</result>
+			<result name="error">./layout/institute/instituteCreation.jsp</result>
+		</action>
+
+
+		<action name="courseCreation"
+			class="com.typogenius.actions.course.CourseAddAction">
+			<result name="success">./layout/course/addCourse.jsp</result>
+			<result name="error">./layout/course/addCourse.jsp</result>
+		</action>
+
+		<action name="courseListAction"
+			class="com.typogenius.actions.course.CourseListAction"
+			method="execute">
+			<result type="json">
+				<param name="excludeProperties">course</param>
+			</result>
+		</action>
+
+		<action name="deleteInstituteAction"
+			class="com.typogenius.actions.institute.InstituteCreationAction"
+			method="deleteInstitute">
+			<result name="success" type="json">
+				<param name="root">responseMap</param>
+			</result>
+			<result name="error" type="json">
+				<param name="root">responseMap</param>
+			</result>
+		</action>
+
+		<action name="deleteStaffAction"
+			class="com.typogenius.actions.staff.StaffCreationAction"
+			method="deleteStaff">
+			<result name="success" type="json">
+				<param name="root">responseMap</param>
+			</result>
+			<result name="error" type="json">
+				<param name="root">responseMap</param>
+			</result>
+		</action>
+
+		<action name="updateInstitute"
+			class="com.typogenius.actions.institute.InstituteCreationAction"
+			method="updateInstitute">
+			<result name="success">./layout/institute/instituteList.jsp</result>
+			<result name="error">./layout/institute/instituteList.jsp</result>
+		</action>
+
+		<action name="updateStaff"
+			class="com.typogenius.actions.staff.StaffCreationAction"
+			method="updateStaff">
+			<result name="success">./layout/staff/staffList.jsp</result>
+			<result name="error">./layout/staff/staffList.jsp</result>
+		</action>
+
+
+		<action name="addStaff"
+			class="com.typogenius.actions.staff.StaffCreationAction">
+			<result name="success">./layout/staff/staffCreation.jsp</result>
+			<result name="error">./layout/staff/staffCreation.jsp</result>
+		</action>
+
+<action name="createStudent" class="com.typogenius.actions.student.StudentCreationAction">
+<result name="success">./layout/student/studentCreation.jsp</result>
+<result name="error">./layout/student/studentCreation.jsp</result>
+</action>
+
+		<action name="logout"
+			class="com.typogenius.actions.LogoutAction">
+			<result name="success">./layout/login.jsp</result>
+		</action>
+
+		<action name="loginCheck"
+			class="com.typogenius.actions.LoginAction">
+			<result name="success">./layout/login.jsp</result>
+			<result name="error">./layout/login.jsp</result>
+			<!-- <result name="success" type="json"> <param name="root">jsonResponse</param> 
+				</result> <result name="error" type="json"> <param name="root">jsonResponse</param> 
+				</result> -->
+		</action>
+		<action name="admissionCheck"
+			class="com.typogenius.actions.AdmissionActions">
+			<result name="success">./layout/admission.jsp</result>
+			<result name="error">./layout/admission.jsp</result>
+		</action>
+	</package>
+</struts>
